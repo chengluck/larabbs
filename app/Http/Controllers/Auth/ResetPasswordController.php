@@ -29,13 +29,6 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Where to redirect users after resetting their password.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
     protected function sendResetResponse(Request $request, $response)
     {
         session()->flash('success', '密码更新成功, 您已成功登录');

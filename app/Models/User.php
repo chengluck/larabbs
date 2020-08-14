@@ -6,10 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     use Notifiable, MustVerifyEmailTrait;
+
 
     /**
      * The attributes that are mass assignable.
@@ -51,5 +53,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function topicNotify($instance)
+    {
+        // 如果要通知的人是当前用户, 就不必通知了
+        if($this->id === Auth::id()){
+            return;
+        }
+
+        $this->increment('notification_count');
+
+        $this->notify($instance);
     }
 }

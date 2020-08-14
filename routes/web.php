@@ -36,7 +36,7 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 
-//用户
+// 用户
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
 // 话题
@@ -49,4 +49,8 @@ Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 // 上传图片
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
+// 话题回复
 Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
+
+// 通知列表页面
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);

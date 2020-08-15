@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Notifiable, MustVerifyEmailTrait, HasRoles;
+    use Notifiable, MustVerifyEmailTrait, HasRoles, Traits\ActiveUserHelper;
 
 
     /**

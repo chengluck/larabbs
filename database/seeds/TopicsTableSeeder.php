@@ -7,7 +7,7 @@ class TopicsTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(Topic::class)->times(100)->create();
+        factory(Topic::class)->times(50)->create();
     }
 
 }

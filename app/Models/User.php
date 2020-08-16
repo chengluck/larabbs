@@ -11,8 +11,9 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
 use App\Models\Traits\ActiveUserHelper;
 use App\Models\Traits\LastActivedAtHelper;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements MustVerifyEmailContract
+class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
 {
     use Notifiable, MustVerifyEmailTrait, HasRoles, ActiveUserHelper,
         LastActivedAtHelper;
@@ -100,5 +101,17 @@ class User extends Authenticatable implements MustVerifyEmailContract
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    // 返回 User 的 id
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    // 需要额外在 JWT 载荷中增加的自定义内容,暂时定为空数组
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

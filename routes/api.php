@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,10 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function(){
         Route::middleware('auth:api')->group(function(){
             // 当前登录用户信息
             Route::get('user', 'UsersController@me')->name('user.show');
+            // 编辑登录用户信息
+            Route::patch('user', 'UsersController@update')->name('user.update');
+            // 上传图片
+            Route::post('images', 'ImagesController@store')->name('images.store');
         });
     });
 

@@ -14,7 +14,8 @@ use App\Models\Traits\LastActivedAtHelper;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Notifiable, MustVerifyEmailTrait, HasRoles, ActiveUserHelper, LastActivedAtHelper;
+    use Notifiable, MustVerifyEmailTrait, HasRoles, ActiveUserHelper,
+        LastActivedAtHelper;
 
 
     /**
@@ -23,7 +24,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * @var array
      */
     protected $fillable = [
-        'name', 'phone', 'email', 'password', 'introduction', 'avatar'
+        'name', 'phone', 'email', 'password', 'introduction', 'avatar',
+        'weixin_openid', 'weixin_unionid',
     ];
 
     /**
